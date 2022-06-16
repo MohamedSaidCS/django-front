@@ -2,6 +2,7 @@ import axios from "axios";
 import {useContext, useEffect, useState} from "react";
 import {UserContext} from "../App";
 import {useNavigate} from "react-router-dom";
+import background from "../assets/images/fotis-fotopoulos-LJ9KY8pIH3E-unsplash.jpg";
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -41,25 +42,42 @@ function Login() {
     }
 
     useEffect(() => {
-        if(user.authenticated)
+        if (user.authenticated)
             navigate('/');
     }, [user])
 
     return (
-        <>
-            <form onSubmit={handleLogin}>
-                <div className="mb-3">
-                    <label htmlFor="username" className="form-label">Username</label>
-                    <input type="text" className="form-control" id="username" onChange={(e) => setUsername(e.target.value)} />
+        <div style={{
+            backgroundImage: `url(${background})`,
+            backgroundSize: 'cover',
+            height: '100vh',
+            paddingTop: "60px"
+        }}>
+            <div className={'d-flex flex-column align-items-center'}>
+            <div className="card">
+                <h5 className="card-header fs-2 text-center">Login</h5>
+                <div className="card-body">
+                    <form onSubmit={handleLogin}>
+                        <div className="mb-3">
+                            <label htmlFor="username" className="form-label">Username</label>
+                            <input type="text" className="form-control" id="username"
+                                   onChange={(e) => setUsername(e.target.value)}/>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <input type="password" className="form-control" id="password"
+                                   onChange={(e) => setPassword(e.target.value)}/>
+                        </div>
+                        <div className={'d-flex justify-content-center'}>
+                            <button type="submit" className="btn btn-primary align-self-center">Login</button>
+                        </div>
+
+                    </form>
+                    {error && (<div className={'alert alert-danger'} style={{whiteSpace: "pre-wrap"}}>{error}</div>)}
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                <button type="submit" className="btn btn-primary">Login</button>
-            </form>
-            {error && (<div className={'alert alert-danger'} style={{whiteSpace: "pre-wrap"}}>{error}</div>)}
-        </>
+            </div>
+        </div>
+        </div>
     );
 }
 
