@@ -3,6 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Jobs from "./pages/Jobs";
 import Job from "./pages/Job";
+import CreateJob from "./pages/CreateJob";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
@@ -19,6 +20,7 @@ function App() {
     username: '',
     user_type: '',
   });
+  const [loading, setLoading] = useState(true);
 
   const checkToken = async (token) => {
     const response = await axios.post('http://127.0.0.1:8000/api/check-token', {token: token});
@@ -34,14 +36,22 @@ function App() {
           username: username,
           id: id,
           user_type: user_type,
-        })
+        });
+        setLoading(false);
 
       }).catch(e => {
         console.log(e);
       });
+    } else {
+      setLoading(false);
     }
 
   }, []);
+
+  if(loading)
+    return(
+        <div>Loading</div>
+    );
 
   return (
       <UserContext.Provider value={{user, setUser}}>
@@ -50,6 +60,7 @@ function App() {
             <Route path={"/"} element={<Home/>}/>
             <Route path={"/jobs"} element={<Jobs/>}/>
             <Route path={"/jobs/:id"} element={<Job/>}/>
+            <Route path={"/jobs/create"} element={<CreateJob/>}/>
             <Route path={"/login"} element={<Login/>}/>
             <Route path={"/register"} element={<Register/>}/>
             <Route path={"/profile"} element={<Profile/>}/>

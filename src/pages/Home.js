@@ -13,6 +13,7 @@ function Home() {
                 <div className={'d-flex justify-content-center align-items-center'}>
                     {
                         user.authenticated && (<>
+                            <Link to={'/jobs'} className={'btn btn-info btn-lg text-white p-2 m-2'}>Jobs</Link>
                             <button onClick={async () => {
                                 await axios.post('http://127.0.0.1:8000/api/logout', null, {
                                     headers: {
