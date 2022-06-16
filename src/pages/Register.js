@@ -42,9 +42,9 @@ function Register() {
             'password_confirmation': passwordConfirmation,
             'user_type': userType,
         }
-        if(userType === 'recruiter')
+        if (userType === 'recruiter')
             data.address = address
-        else if(userType === 'developer') {
+        else if (userType === 'developer') {
             data.gender = gender;
             data.tags = selectedTags;
         }
@@ -62,84 +62,98 @@ function Register() {
     }
 
     useEffect(() => {
-        if(user.authenticated === true)
+        if (user.authenticated === true)
             navigate('/');
         fetchTags();
     }, [user])
 
     return (
-        <div style={{backgroundImage : `url(${background})`, backgroundSize:'cover', height:'140vh', paddingTop:"60px"}}>
-        <div className={'container'} style={{}}>
-            <div className={'d-flex col-4 justify-content-center'}>
-                {error && (<div className={'alert alert-danger'} style={{whiteSpace: "pre-wrap"}}>{error}</div>)}
+        <div style={{
+            backgroundImage: `url(${background})`,
+            backgroundSize: 'cover',
+            height: '140vh',
+            paddingTop: "60px"
+        }}>
+            <div className={'container d-flex flex-column'} style={{}}>
+                <div className={'d-flex col-4 align-self-center'}>
+                    {error && (<div className={'alert alert-danger'} style={{whiteSpace: "pre-wrap"}}>{error}</div>)}
+                </div>
+                <div className="card">
+                    <h5 className="card-header">Register</h5>
+                    <div className="card-body bg-transparent">
+                        <form onSubmit={handleRegister}>
+                            <div className="mb-3">
+                                <label htmlFor="username" className="form-label fw-bold fs-5">Username</label>
+                                <input type="text" className="form-control" id="username"
+                                       onChange={(e) => setUsername(e.target.value)}/>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="email" className="form-label fw-bold fs-5">Email address</label>
+                                <input type="email" className="form-control" id="email"
+                                       onChange={(e) => setEmail(e.target.value)}/>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="password" className="form-label fw-bold fs-5">Password</label>
+                                <input type="password" className="form-control" id="password"
+                                       onChange={(e) => setPassword(e.target.value)}/>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="confirm-password" className="form-label fw-bold fs-5">Confirm
+                                    Password</label>
+                                <input type="password" className="form-control" id="confirm-password"
+                                       onChange={(e) => setPasswordConfirmation(e.target.value)}/>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="user-type" className="form-label fw-bold fs-5">User Type</label>
+                                <select id="user-type" className="form-select"
+                                        onChange={(e) => setUserType(e.target.value)}>
+                                    <option value="">Select Type</option>
+                                    <option value="recruiter">Recruiter</option>
+                                    <option value="developer">Developer</option>
+                                </select>
+                            </div>
+                            {userType === 'developer' && (
+                                <>
+                                    <div className="mb-3">
+                                        <label htmlFor="gender" className="form-label fw-bold fs-5">Gender</label>
+                                        <select id="gender" className="form-select"
+                                                onChange={(e) => setGender(e.target.value)}>
+                                            <option value="">Select Type</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="mb-3">
+                                        <label htmlFor="tags" className="form-label fw-bold fs-5">Tags</label>
+                                        <select multiple id="tags" className="form-select"
+                                                onChange={(e) => setSelectedTags(Array.from(e.target.selectedOptions, option => option.value))}>
+                                            {renderTags()}
+                                        </select>
+                                    </div>
+                                </>
+                            )}
+
+                            {userType === 'recruiter' && (
+                                <>
+                                    <div className="mb-3">
+                                        <label htmlFor="address" className="form-label">Address</label>
+                                        <input type="text" className="form-control" id="address"
+                                               onChange={(e) => setAddress(e.target.value)}/>
+                                    </div>
+                                </>
+                            )}
+                            {userType !== '' && <button type="submit" className="btn btn-primary">Register</button>}
+                        </form>
+                        {success && (<div className={'alert alert-success'} role={'alert'}>{success}
+                            <button type="button" className="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>)}
+
+                    </div>
+                </div>
             </div>
-            <div className="card">
-                <h5 className="card-header">Register</h5>
-                <div className="card-body bg-transparent">
-            <form onSubmit={handleRegister}>
-                <div className="mb-3">
-                    <label htmlFor="username" className="form-label fw-bold fs-5">Username</label>
-                    <input type="text" className="form-control" id="username" onChange={(e) => setUsername(e.target.value)} />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label fw-bold fs-5">Email address</label>
-                    <input type="email" className="form-control" id="email" onChange={(e) => setEmail(e.target.value)} />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label fw-bold fs-5">Password</label>
-                    <input type="password" className="form-control" id="password" onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="confirm-password" className="form-label fw-bold fs-5">Confirm Password</label>
-                    <input type="password" className="form-control" id="confirm-password" onChange={(e) => setPasswordConfirmation(e.target.value)} />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="user-type" className="form-label fw-bold fs-5">User Type</label>
-                    <select id="user-type" className="form-select" onChange={(e) => setUserType(e.target.value)}>
-                        <option value="">Select Type</option>
-                        <option value="recruiter">Recruiter</option>
-                        <option value="developer">Developer</option>
-                    </select>
-                </div>
-                {userType === 'developer' && (
-                    <>
-                        <div className="mb-3">
-                            <label htmlFor="gender" className="form-label fw-bold fs-5">Gender</label>
-                            <select id="gender" className="form-select" onChange={(e) => setGender(e.target.value)}>
-                                <option value="">Select Type</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-                        </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="tags" className="form-label fw-bold fs-5">Tags</label>
-                            <select multiple id="tags" className="form-select"
-                                    onChange={(e) => setSelectedTags(Array.from(e.target.selectedOptions, option => option.value))}>
-                                {renderTags()}
-                            </select>
-                        </div>
-                    </>
-                )}
-
-                {userType === 'recruiter' && (
-                    <>
-                        <div className="mb-3">
-                            <label htmlFor="address" className="form-label">Address</label>
-                            <input type="text" className="form-control" id="address" onChange={(e) => setAddress(e.target.value)} />
-                        </div>
-                    </>
-                )}
-                {userType !== ''  && <button type="submit" className="btn btn-primary">Register</button>}
-            </form>
-            {success && (<div className={'alert alert-success'} role={'alert'}>{success}
-                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>)}
-
         </div>
-        </div>
-        </div>
-            </div>
     );
 }
 

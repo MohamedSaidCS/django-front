@@ -16,6 +16,7 @@ function App() {
     authenticated: false,
     token: '',
     id: 0,
+    username: '',
     user_type: '',
   });
 
@@ -26,10 +27,11 @@ function App() {
 
   useEffect(() => {
     if(localStorage.getItem('token')) {
-      checkToken(localStorage.getItem('token')).then(({id, user_type}) => {
+      checkToken(localStorage.getItem('token')).then(({id, username, user_type}) => {
         setUser({
           authenticated: true,
           token: localStorage.getItem('token'),
+          username: username,
           id: id,
           user_type: user_type,
         })
