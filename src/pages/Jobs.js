@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 function Jobs() {
-  const [jobsList, SetjobsList] = useState(null);
+  const [jobs, setJobs] = useState(null);
   const getAllJobs = async () => {
     const response = await axios.get("http://127.0.0.1:8000/api/jobs/");
     const data = await response.data;
 
-    SetjobsList(data);
+    setJobs(data);
   };
   useEffect(() => {
     getAllJobs();
@@ -15,8 +15,8 @@ function Jobs() {
   return (
     <div>
       jobs
-      {jobsList &&
-        jobsList.map((job) => {
+      {jobs &&
+        jobs.map((job) => {
           console.log(job);
         })}
     </div>
