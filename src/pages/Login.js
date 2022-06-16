@@ -25,6 +25,7 @@ function Login() {
             const user = {
                 authenticated: true,
                 token: result.token,
+                username: result.username,
                 id: result.id,
                 user_type: result.user_type,
             }
@@ -54,29 +55,30 @@ function Login() {
             paddingTop: "60px"
         }}>
             <div className={'d-flex flex-column align-items-center'}>
-            <div className="card">
-                <h5 className="card-header fs-2 text-center">Login</h5>
-                <div className="card-body">
-                    <form onSubmit={handleLogin}>
-                        <div className="mb-3">
-                            <label htmlFor="username" className="form-label">Username</label>
-                            <input type="text" className="form-control" id="username"
-                                   onChange={(e) => setUsername(e.target.value)}/>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="password" className="form-label">Password</label>
-                            <input type="password" className="form-control" id="password"
-                                   onChange={(e) => setPassword(e.target.value)}/>
-                        </div>
-                        <div className={'d-flex justify-content-center'}>
-                            <button type="submit" className="btn btn-primary align-self-center">Login</button>
-                        </div>
+                <div className="card col-3">
+                    <h5 className="card-header fs-2 text-center">Login</h5>
+                    <div className="card-body">
+                        <form onSubmit={handleLogin}>
+                            <div className="mb-3">
+                                <label htmlFor="username" className="form-label fw-bold fs-5">Username</label>
+                                <input type="text" className="form-control" id="username"
+                                       onChange={(e) => setUsername(e.target.value)}/>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="password" className="form-label fw-bold fs-5">Password</label>
+                                <input type="password" className="form-control" id="password"
+                                       onChange={(e) => setPassword(e.target.value)}/>
+                            </div>
+                            <div className={'d-flex justify-content-center'}>
+                                <button type="submit" className="btn btn-primary btn-lg align-self-center">Login</button>
+                            </div>
 
-                    </form>
-                    {error && (<div className={'alert alert-danger'} style={{whiteSpace: "pre-wrap"}}>{error}</div>)}
+                        </form>
+                        {error && (
+                            <div className={'alert alert-danger'} style={{whiteSpace: "pre-wrap"}}>{error}</div>)}
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     );
 }
