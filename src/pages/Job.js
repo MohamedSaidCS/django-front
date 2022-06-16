@@ -1,7 +1,7 @@
 import React from 'react';
 import {useParams} from "react-router-dom";
 
-function Job(props) {
+function Job() {
     const {id} = useParams();
     return (
         <div>
