@@ -68,13 +68,13 @@ function Register() {
     }, [user])
 
     return (
-        <div style={{backgroundImage : `url(${background})`, backgroundSize:'cover', height:'140vh', paddingTop:"60px"}}>
+        <div style={{backgroundImage : `url(${background})`, backgroundSize:'cover', height:'150vh', paddingTop:"60px"}}>
         <div className={'container'} style={{}}>
             <div className={'d-flex col-4 justify-content-center'}>
                 {error && (<div className={'alert alert-danger'} style={{whiteSpace: "pre-wrap"}}>{error}</div>)}
             </div>
             <div className="card">
-                <h5 className="card-header">Register</h5>
+                <h5 className="card-header text-center display-6">Register</h5>
                 <div className="card-body bg-transparent">
             <form onSubmit={handleRegister}>
                 <div className="mb-3">
@@ -125,7 +125,7 @@ function Register() {
                 {userType === 'recruiter' && (
                     <>
                         <div className="mb-3">
-                            <label htmlFor="address" className="form-label">Address</label>
+                            <label htmlFor="address" className="form-label fw-bold fs-5">Address</label>
                             <input type="text" className="form-control" id="address" onChange={(e) => setAddress(e.target.value)} />
                         </div>
                     </>
