@@ -11,6 +11,7 @@ import {createContext, useEffect, useState} from "react";
 import axios from "axios";
 import EditJob from "./pages/EditJob";
 import EditProfile from "./pages/EditProfile";
+import Notifications from "./pages/Notifications";
 
 export const UserContext = createContext();
 
@@ -64,6 +65,7 @@ function App() {
             <Route path={"/profile"} element={<Profile/>}/>
             <Route path={"/profile/:id"} element={<Profile/>}/>
             <Route path={"/profile/:id/edit"} element={<EditProfile/>}/>
+            <Route path={"/notifications"} element={<Notifications/>}/>
           </Routes>
         </div>
       </UserContext.Provider>
