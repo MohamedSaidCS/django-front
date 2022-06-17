@@ -15,6 +15,7 @@ function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setError('');
         const data = {
             username: username,
             password: password,

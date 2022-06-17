@@ -35,6 +35,8 @@ function Register() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setSuccess('');
+        setError('');
         const data = {
             'username': username,
             'email': email,
@@ -62,7 +64,7 @@ function Register() {
     }
 
     useEffect(() => {
-        if (user.authenticated === true)
+        if (user.authenticated)
             navigate('/');
         fetchTags();
     }, [user])

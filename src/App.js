@@ -9,6 +9,8 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import {createContext, useEffect, useState} from "react";
 import axios from "axios";
+import EditJob from "./pages/EditJob";
+import EditProfile from "./pages/EditProfile";
 
 export const UserContext = createContext();
 
@@ -60,11 +62,13 @@ function App() {
             <Route path={"/"} element={<Home/>}/>
             <Route path={"/jobs"} element={<Jobs/>}/>
             <Route path={"/jobs/:id"} element={<Job/>}/>
+            <Route path={"/jobs/:id/edit"} element={<EditJob/>}/>
             <Route path={"/jobs/create"} element={<CreateJob/>}/>
             <Route path={"/login"} element={<Login/>}/>
             <Route path={"/register"} element={<Register/>}/>
             <Route path={"/profile"} element={<Profile/>}/>
             <Route path={"/profile/:id"} element={<Profile/>}/>
+            <Route path={"/profile/:id/edit"} element={<EditProfile/>}/>
           </Routes>
         </div>
       </UserContext.Provider>
