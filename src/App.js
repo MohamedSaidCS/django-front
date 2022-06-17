@@ -18,9 +18,6 @@ function App() {
   const [user, setUser] = useState({
     authenticated: false,
     token: '',
-    id: 0,
-    username: '',
-    user_type: '',
   });
   const [loading, setLoading] = useState(true);
 
@@ -31,13 +28,11 @@ function App() {
 
   useEffect(() => {
     if(localStorage.getItem('token')) {
-      checkToken(localStorage.getItem('token')).then(({id, username, user_type}) => {
+      checkToken(localStorage.getItem('token')).then(({user}) => {
         setUser({
           authenticated: true,
           token: localStorage.getItem('token'),
-          username: username,
-          id: id,
-          user_type: user_type,
+          ...user
         });
         setLoading(false);
 
