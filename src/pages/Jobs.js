@@ -24,7 +24,7 @@ function Jobs() {
         console.log(jobs);
         return jobs.map((job) => {
             return (
-                <div key={job.id} className="card">
+                <div key={job.id} className="card mb-4">
                     <h5 className="card-header">{job.name}</h5>
                     <div className="card-body">
                         <h5 className="card-title">Job Description: {job.description}</h5>
@@ -52,14 +52,15 @@ function Jobs() {
             height: '100vh',
             paddingTop: "60px"
         }}>
-        <div className={'container'}>
-            <p className={'display-5 text-center text-white'}>Job Postings</p>
-            <div className={'d-flex'}>
-                {user.user_type === 'recruiter' && <Link to="/jobs/create" className="btn btn-success btn-lg ms-auto my-3">Create Job</Link>}
-            </div>
+            <div className={'container'}>
+                <p className={'display-5 text-center text-white'}>Job Postings</p>
+                <div className={'d-flex'}>
+                    {user.user_type === 'recruiter' &&
+                        <Link to="/jobs/create" className="btn btn-success btn-lg ms-auto my-3">Create Job</Link>}
+                </div>
 
-            {jobs.length > 0 && renderJobs()}
-        </div>
+                {jobs.length > 0 && renderJobs()}
+            </div>
         </div>
     );
 }
