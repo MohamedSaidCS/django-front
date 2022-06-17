@@ -2,6 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {UserContext} from "../App";
 import {Link, useNavigate} from "react-router-dom";
+import background from "../assets/images/fotis-fotopoulos-LJ9KY8pIH3E-unsplash.jpg";
 
 function CreateJob() {
     const [name, setName] = useState('');
@@ -54,47 +55,60 @@ function CreateJob() {
     }
 
     useEffect(() => {
-        if(user.authenticated)
+        if (user.authenticated)
             fetchTags();
         else
             navigate('/login');
     }, [user])
 
     return (
-        <>
-            <form onSubmit={handleCreateJob}>
+        <div style={{
+            backgroundImage: `url(${background})`,
+            backgroundSize: 'cover',
+            height: '100vh',
+            paddingTop: "60px"
+        }}>
+            <div className={'d-flex flex-column align-items-center'}>
+                <div className="card col-6">
+                    <h5 className="card-header fs-2 text-center">Create Job</h5>
+                    <div className="card-body">
+                        <form onSubmit={handleCreateJob}>
+                            <div className="mb-3">
+                                <label htmlFor="name" className="form-label fw-bold fs-5">Name</label>
+                                <input type="text" className="form-control" id="name"
+                                       onChange={(e) => setName(e.target.value)}/>
+                            </div>
 
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label fw-bold fs-5">Name</label>
-                    <input type="text" className="form-control" id="name"
-                           onChange={(e) => setName(e.target.value)}/>
+                            <div className="mb-3">
+                                <label htmlFor="description" className="form-label fw-bold fs-5">Description</label>
+                                <input type="text" className="form-control" id="description"
+                                       onChange={(e) => setDescription(e.target.value)}/>
+                            </div>
+
+                            <div className="mb-3">
+                                <label htmlFor="tags" className="form-label fw-bold fs-5">Tags</label>
+                                <select multiple id="tags" className="form-select"
+                                        onChange={(e) => setSelectedTags(Array.from(e.target.selectedOptions, option => option.value))}>
+                                    {renderTags()}
+                                </select>
+                                <div className={'d-flex align-items-center justify-content-center mt-2'}>
+                                    <Link to={'/jobs'} type="submit" className="btn btn-secondary mx-2">Back</Link>
+                                    <button type="submit" className="btn btn-primary mx-2">Create Job</button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        {success && (<div className={'alert alert-success'} role={'alert'}>{success}
+                        </div>)}
+
+                        {error && (<div className={'alert alert-danger'} role={'alert'}
+                                        style={{whiteSpace: "pre-wrap"}}>{error}
+                        </div>)}
+                    </div>
                 </div>
-
-                <div className="mb-3">
-                    <label htmlFor="description" className="form-label fw-bold fs-5">Description</label>
-                    <input type="text" className="form-control" id="description"
-                           onChange={(e) => setDescription(e.target.value)}/>
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="tags" className="form-label fw-bold fs-5">Tags</label>
-                    <select multiple id="tags" className="form-select"
-                            onChange={(e) => setSelectedTags(Array.from(e.target.selectedOptions, option => option.value))}>
-                        {renderTags()}
-                    </select>
-
-                    <button type="submit" className="btn btn-primary">Create Job</button>
-                    <Link to={'/jobs'} type="submit" className="btn btn-primary">Back</Link>
-                </div>
-
-            </form>
-
-            {success && (<div className={'alert alert-success'} role={'alert'}>{success}
-            </div>)}
-
-            {error && (<div className={'alert alert-danger'} role={'alert'} style={{whiteSpace: "pre-wrap"}}>{error}
-            </div>)}
-        </>
+            </div>
+        </div>
     );
 }
 

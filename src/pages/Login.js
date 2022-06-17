@@ -55,6 +55,13 @@ function Login() {
             height: '100vh',
             paddingTop: "60px"
         }}>
+            <div className={'d-flex justify-content-center'}>
+                {error && (
+                    <div className={'alert alert-danger my-2 col-5 align-self-center alert-dismissible fade show'}
+                         style={{whiteSpace: "pre-wrap"}} role={'alert'}>{error}
+                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>)}
+            </div>
             <div className={'d-flex flex-column align-items-center'}>
                 <div className="card col-3">
                     <h5 className="card-header fs-2 text-center">Login</h5>
@@ -71,12 +78,11 @@ function Login() {
                                        onChange={(e) => setPassword(e.target.value)}/>
                             </div>
                             <div className={'d-flex justify-content-center'}>
-                                <button type="submit" className="btn btn-primary btn-lg align-self-center">Login</button>
+                                <button type="submit" className="btn btn-primary btn-lg align-self-center">Login
+                                </button>
                             </div>
 
                         </form>
-                        {error && (
-                            <div className={'alert alert-danger'} style={{whiteSpace: "pre-wrap"}}>{error}</div>)}
                     </div>
                 </div>
             </div>
