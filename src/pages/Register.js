@@ -79,7 +79,7 @@ function Register() {
             <div className={'container d-flex flex-column'} style={{}}>
                 <div className={'d-flex col-4 align-self-center'}>
                     {error && (<div className={'alert alert-danger'} style={{whiteSpace: "pre-wrap"}}>{error}</div>)}
-                </div>
+                </div>jobs
                 <div className="card">
                     <h5 className="card-header">Register</h5>
                     <div className="card-body bg-transparent">
