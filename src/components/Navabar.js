@@ -1,11 +1,12 @@
 import React from "react"
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useContext} from "react";
 import {UserContext} from "../App";
 import axios from "axios";
 
 const Navbar = () => {
     const {user, setUser} = useContext(UserContext);
+    const navigate = useNavigate();
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
@@ -42,7 +43,7 @@ const Navbar = () => {
                                         <Link to={`/profile/${user.id}`} className="nav-link">Profile</Link>
                                     </li>
                                         <li className="nav-item">
-                                            <a onClick={async () => {
+                                            <span style={{cursor: "pointer"}} onClick={async () => {
                                                 await axios.post('http://127.0.0.1:8000/api/logout', null, {
                                                     headers: {
                                                         'Authorization': `Token ${user.token}`
@@ -56,8 +57,9 @@ const Navbar = () => {
                                                     id: '',
                                                     user_type: '',
                                                 });
+                                                navigate('/');
                                             }} className={'nav-link'}>Logout
-                                            </a>
+                                            </span>
                                         </li>
                                 </>
                             )}

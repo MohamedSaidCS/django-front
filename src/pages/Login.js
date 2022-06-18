@@ -26,9 +26,7 @@ function Login() {
             const user = {
                 authenticated: true,
                 token: result.token,
-                username: result.username,
-                id: result.id,
-                user_type: result.user_type,
+                ...result.user
             }
             setUser(user);
             localStorage.setItem('token', user.token);

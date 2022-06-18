@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {UserContext} from "../App";
 import axios from "axios";
@@ -13,6 +13,7 @@ function Profile() {
     const fetchUser = async () => {
         if (id === user.id || !id) {
             setProfileUser(user);
+            setLoading(false);
         } else {
             const response = await axios.get(`http://127.0.0.1:8000/api/profiles/${id}`, {
                 headers: {
@@ -52,12 +53,20 @@ function Profile() {
                             <h5 className="card-title fs-4">{profileUser.username.toUpperCase()}</h5>
                             <p className="card-text fw-bold fs-5">
                                 <span>E-Mail: {profileUser.email}</span><br/>
-                                <span>Gender: {profileUser.gender}</span><br/>
-                                <span>Technologies: {profileUser.tags.map((tag) => tag.name).join(', ')}</span><br/>
-                                <span>Address: {profileUser.address}</span>
+                                {profileUser.user_type === 'developer' &&
+                                    (<>
+                                        <span>Gender: {profileUser.gender}</span><br/>
+                                        <span>Technologies: {profileUser.tags.map((tag) => tag.name).join(', ')}</span><br/>
+                                    </>)}
+                                {profileUser.user_type === 'recruiter' && (
+                                    <span>Address: {profileUser.address}</span>
+                                )}
                             </p>
                             <div>
-                                <button className={'btn btn-success btn-lg'}>Edit Profile</button>
+                                {profileUser.id === user.id &&
+                                    (
+                                        <Link to={`/profile/${user.id}/edit`} className={'btn btn-success btn-lg'}>Edit Profile</Link>
+                                    )}
                             </div>
                         </div>
                         <div className="card-footer text-primary fs-4">
@@ -66,7 +75,6 @@ function Profile() {
                     </div>
                 </div>
             </div>
-            {console.log(profileUser)}
         </div>
     );
 }
