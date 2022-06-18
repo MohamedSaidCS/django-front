@@ -17,3 +17,19 @@ Simple Job Application where you can register as a recruiter (Company) who needs
 4) Apply for a Job
 ![screen-gif](./features/04.gif)
 5) Accept a developer
+
+# Process
+1) [Backend](https://github.com/yhyamohamed/job_app_django)
+2) Clone the project
+```
+git clone https://github.com/MohamedSaidCS/django-front.git
+```
+3) Install Packages
+```
+npm install
+```
+4) Run server
+```
+npm start
+```
+5) Open http://localhost:3000 to view it in your browsers
