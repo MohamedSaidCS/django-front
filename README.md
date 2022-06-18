@@ -33,3 +33,13 @@ npm install
 npm start
 ```
 5) Open http://localhost:3000 to view it in your browsers
+
+# Authors
+* [Hassan Tawfic](https://www.linkedin.com/in/hassantawfic/)
+* [Mahmoud Kamal](https://www.linkedin.com/in/mahmoudfierro98)
+* [Mohamed Said](https://github.com/MohamedSaidCS)
+* [Rana Ehab](https://www.linkedin.com/in/Rana-Ehab56)
+* [Salma Mohamed](https://github.com/sm66707)
+* [Yahia Mohamed](https://www.linkedin.com/in/yahiaa-mohamed/)
+
+<p align="right">(<a href="#top">Top</a>)</p>
