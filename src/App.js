@@ -12,6 +12,7 @@ import axios from "axios";
 import EditJob from "./pages/EditJob";
 import EditProfile from "./pages/EditProfile";
 import Notifications from "./pages/Notifications";
+import Navbar from "./components/Navabar";
 
 export const UserContext = createContext();
 
@@ -54,7 +55,9 @@ function App() {
   return (
       <UserContext.Provider value={{user, setUser}}>
         <div className="App">
+        <Navbar/>
           <Routes>
+            {/*<Route path={"/"} element={<Navbar/>}/>*/}
             <Route path={"/"} element={<Home/>}/>
             <Route path={"/jobs"} element={<Jobs/>}/>
             <Route path={"/jobs/:id"} element={<Job/>}/>
